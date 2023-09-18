@@ -2,7 +2,17 @@ import React from 'react';
 import { View, Text, TextInput, StyleSheet } from 'react-native';
 import { Colors } from '../constants/Colors';
 
-const Input = ({ title, placeholder, value, touched, error, onChangeText, focus }) => {
+const Input = ({
+  title,
+  placeholder,
+  value,
+  touched,
+  error,
+  onChangeText,
+  focus,
+  editable,
+  email
+}) => {
   return (
     <View style={styles.container}>
       <View style={styles.ctn}>
@@ -11,11 +21,13 @@ const Input = ({ title, placeholder, value, touched, error, onChangeText, focus 
         </View>
         <View style={styles.inputCtn}>
           <TextInput
-            style={styles.input}
+            editable={editable ? editable : true}
+            style={[styles.input, email && { color: Colors.grey }]}
             autoFocus={focus ? focus : false}
             placeholder={placeholder}
             onChangeText={onChangeText}
             placeholderTextColor={Colors.lightgrey}
+            underlineColorAndroid={'transparent'}
             value={value}
           />
         </View>

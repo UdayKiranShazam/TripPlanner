@@ -1,6 +1,7 @@
 import React from 'react';
 import {
   SafeAreaView,
+  StatusBar,
   StyleSheet,
   Text,
 } from 'react-native';
@@ -12,6 +13,7 @@ const App = () => {
 
   return (
     <SafeAreaView style={styles.rootContainer}>
+      <StatusBar backgroundColor={Colors.secondary} barStyle={'dark-content'} />
       <AuthContextProvider>
         <Routes />
       </AuthContextProvider>

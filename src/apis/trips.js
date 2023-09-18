@@ -8,15 +8,22 @@ export const fetchTrips = async (categoryid) => {
 };
 
 export const fetchCreateTrips = async (data) => {
+  return apiInstance
+    .post(`/api/trips/addTrip`, data)
+    .then((response) => response.data)
+    .catch((err) => err);
+};
+
+export const fetchUpdateTrips = async (data) => {
   return await apiInstance
-    .post(`/api/trips/addTask`, data)
+    .post(`/api/trips/updateTrip`, data)
     .then((response) => response.data)
     .catch((err) => err);
 };
 
 export const fetchDeleteTrip = async (data) => {
   return await apiInstance
-    .post(`/api/trips/deleteTask`, data)
+    .post(`/api/trips/deleteTrip`, data)
     .then((response) => response.data)
     .catch((err) => err);
 };

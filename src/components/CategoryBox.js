@@ -2,10 +2,10 @@ import React from 'react';
 import { View, Text, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native';
 import { Colors } from '../constants/Colors';
 
-const CategoryBox = ({ source, category }) => {
+const CategoryBox = ({ source, category, onPress }) => {
   return (
     <View style={styles.container}>
-      <TouchableOpacity style={styles.Ctn}>
+      <TouchableOpacity style={styles.Ctn} onPress={onPress}>
         <ImageBackground source={source} style={styles.imgCtn} imageStyle={styles.imgStyle}>
           <Text style={styles.text}>{category}</Text>
         </ImageBackground>

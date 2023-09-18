@@ -6,7 +6,7 @@ const Submit = ({ onPress, text, loader }) => {
   return (
     <View style={styles.ctn}>
       {loader ? (
-        <TouchableOpacity style={[styles.submitBtn, { paddingVertical: 10 }]}>
+        <TouchableOpacity style={[styles.submitBtn, { paddingVertical: 14 }]}>
           <ActivityIndicator size={'small'} color={Colors.white} />
         </TouchableOpacity>
       ) : (

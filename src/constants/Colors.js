@@ -10,5 +10,8 @@ export const Colors = {
   slightblack: '#0000004D',
   darkgrey: '#696969',
   red: '#ff0000',
-  seagreen: '#2e8b57'
+  seagreen: '#2e8b57',
+  yellowgreen: '#9acd32',
+  limegreen: '#32cd32',
+  Warning: '#FFAB00'
 };

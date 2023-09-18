@@ -20,10 +20,10 @@ const BottomBar = ({ navigation }) => {
             onPress={() => navigation.navigate('Tripslist')}
           />
         </Pressable>
-        <Pressable onPress={() => navigation.navigate('Addtask')}>
+        <Pressable onPress={() => navigation.navigate('Profile')}>
           <Entypo name={'user'} color={Colors.white} size={24} />
         </Pressable>
-        <Pressable>
+        <Pressable onPress={() => navigation.navigate('Notifications')}>
           <Material name={'bell'} color={Colors.white} size={24} />
         </Pressable>
       </View>

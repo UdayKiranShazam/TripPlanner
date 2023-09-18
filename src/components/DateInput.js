@@ -14,26 +14,16 @@ const DateInput = ({
   touched,
   errors,
   onPress,
-  placeholder,
-  minimumDate,
-  maximumDate
+  placeholder
 }) => {
   return (
     <View style={styles.rootContainer}>
       <View style={[styles.dateCtn]}>
-        {/* <Icon
-          name="calendar"
-          type="font-awesome"
-          color={theme.themeCOLORS.grey}
-          size={24}
-          style={styles.dateIcon}
-        /> */}
-
         <View style={styles.textCtn}>
           <Text style={styles.text}>{title}</Text>
         </View>
         <View style={styles.dateHolder}>
-          <Pressable onPressIn={onPress} style={styles.dateText}>
+          <Pressable onPress={onPress} style={styles.dateText}>
             <Text style={[styles.dateText, { color: value ? Colors.black : Colors.lightgrey }]}>
               {value ? value : placeholder}
             </Text>
@@ -45,11 +35,15 @@ const DateInput = ({
           is24Hour={true}
           mode={mode ? mode : 'date'}
           display="spinner"
-          minimumDate={minimumDate ? minimumDate : new Date()}
-          maximumDate={maximumDate ? maximumDate : null}
           onConfirm={onConfirm}
           onCancel={onCancel}
-          date={value ? new Date(moment(value, 'DD-MM-YYYY')) : new Date()}
+          date={
+            value
+              ? mode
+                ? new Date(moment(value).format('YYYY-MM-DD HH:mm:ss'))
+                : new Date(moment(value).format('YYYY-MM-DD'))
+              : new Date()
+          }
         />
       </View>
       <Text style={styles.errorText}>{touched && errors}</Text>
@@ -85,6 +79,8 @@ const styles = StyleSheet.create({
     paddingLeft: 0
   },
   errorText: {
+    paddingTop: 2,
+    paddingLeft: 2,
     fontSize: 12,
     color: Colors.red
   }

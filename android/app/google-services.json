@@ -1,44 +1,26 @@
 {
   "project_info": {
-    "project_number": "484180490248",
-    "project_id": "tripplanner-399213",
-    "storage_bucket": "tripplanner-399213.appspot.com"
+    "project_number": "489376564228",
+    "project_id": "tripplanner-ebe2a",
+    "storage_bucket": "tripplanner-ebe2a.appspot.com"
   },
   "client": [
     {
       "client_info": {
-        "mobilesdk_app_id": "1:484180490248:android:b0b78c73a50b3b2147b9bd",
+        "mobilesdk_app_id": "1:489376564228:android:6e301b1fee68902d15a151",
         "android_client_info": {
           "package_name": "com.tripplanner"
         }
       },
-      "oauth_client": [
-        {
-          "client_id": "484180490248-at8jipi4jq12rnlavae1a7vjbpe32cii.apps.googleusercontent.com",
-          "client_type": 1,
-          "android_info": {
-            "package_name": "com.tripplanner",
-            "certificate_hash": "ee3e4fbf8b327cf6aeffe6722706045f0f2674dc"
-          }
-        },
-        {
-          "client_id": "484180490248-48rqa2n7fad5rjmsjo5km9ufmvu7drfj.apps.googleusercontent.com",
-          "client_type": 3
-        }
-      ],
+      "oauth_client": [],
       "api_key": [
         {
-          "current_key": "AIzaSyDOsHUbyUODO5ZEu_02gkb6DqdaIVVu8CY"
+          "current_key": "AIzaSyC0oIavA-x7lDK1MCY7w8l86UhOA73zd00"
         }
       ],
       "services": {
         "appinvite_service": {
-          "other_platform_oauth_client": [
-            {
-              "client_id": "484180490248-48rqa2n7fad5rjmsjo5km9ufmvu7drfj.apps.googleusercontent.com",
-              "client_type": 3
-            }
-          ]
+          "other_platform_oauth_client": []
         }
       }
     }

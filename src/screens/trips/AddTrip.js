@@ -9,10 +9,16 @@ import DateInput from '../../components/DateInput';
 import Submit from '../../components/Submit';
 import Header from '../../components/Header';
 import moment from 'moment';
+import { fetchCreateTrips, fetchUpdateTrips } from '../../apis/trips';
+import Toast from 'react-native-toast-message';
 
-const AddTrip = ({ navigation }) => {
+const AddTrip = ({ navigation, route }) => {
   const [startDate, setStartDate] = useState(false);
   const [endDate, setEndDate] = useState(false);
+  const edit = route.params?.edit;
+  const trip = route.params?.trip;
+  const selectedId = route.params?.id;
+  const [loader, setLoader] = useState(false);
 
   const validate = yup.object().shape({
     tripname: yup
@@ -30,10 +36,11 @@ const AddTrip = ({ navigation }) => {
   });
 
   const initialValues = {
-    tripname: '',
-    destination: '',
-    startdate: '',
-    enddate: ''
+    tripname: trip ? trip.tripname : '',
+    destination: trip ? trip.destination : '',
+    startdate: trip ? trip.startdate : '',
+    enddate: trip ? trip.enddate : '',
+    categoryid: trip ? trip.categoryid : selectedId
   };
 
   const showStartDate = () => {
@@ -52,7 +59,48 @@ const AddTrip = ({ navigation }) => {
     setEndDate(false);
   };
 
-  const submitData = () => {};
+  const toast = (type, msg) => {
+    Toast.show({
+      type: type,
+      text1: msg,
+      visibilityTime: 2000
+    });
+  };
+
+  const submitData = async (values) => {
+    try {
+      setLoader(true);
+      if (edit) {
+        values.id = trip.id;
+        const response = await fetchUpdateTrips(values);
+        if (response.status) {
+          toast('success', response.message);
+          setTimeout(() => {
+            setLoader(false);
+            navigation.goBack();
+          }, 2000);
+        } else {
+          setLoader(false);
+          toast('error', response?.message);
+        }
+      } else {
+        const response = await fetchCreateTrips(values);
+        if (response.status) {
+          toast('success', response.message);
+          setTimeout(() => {
+            setLoader(false);
+            navigation.goBack();
+          }, 2000);
+        } else {
+          setLoader(false);
+          toast('error', response?.message);
+        }
+      }
+    } catch (err) {
+      setLoader(false);
+      toast('error', err?.message);
+    }
+  };
 
   return (
     <View style={styles.container}>
@@ -88,12 +136,12 @@ const AddTrip = ({ navigation }) => {
                 value={values.startdate}
                 isVisible={startDate}
                 onConfirm={(date) => {
-                  setFieldValue('startdate', moment(date).format('DD-MM-YYYY'));
+                  setFieldValue('startdate', moment(date).format('YYYY-MM-DD'));
                   hidestartDate();
                 }}
                 onCancel={hidestartDate}
                 touched={touched.startdate}
-                errors={touched.startdate}
+                errors={errors.startdate}
               />
               <DateInput
                 placeholder={'EndDate'}
@@ -102,21 +150,22 @@ const AddTrip = ({ navigation }) => {
                 value={values.enddate}
                 isVisible={endDate}
                 onConfirm={(date) => {
-                  setFieldValue('enddate', moment(date).format('DD-MM-YYYY'));
+                  setFieldValue('enddate', moment(date).format('YYYY-MM-DD'));
                   hideEndDate();
                 }}
                 onCancel={hideEndDate}
                 touched={touched.startdate}
-                errors={touched.enddate}
+                errors={errors.enddate}
               />
 
               <View style={styles.submitCtn}>
-                <Submit text={'Submit'} onPress={handleSubmit} />
+                <Submit loader={loader} text={'Submit'} onPress={handleSubmit} />
               </View>
             </View>
           );
         }}
       </Formik>
+      <Toast />
     </View>
   );
 };

@@ -6,3 +6,10 @@ export const fetchProfile = async () => {
     .then((response) => response.data)
     .catch((err) => err);
 };
+
+export const fetchUpdateProfile = async (data) => {
+  return await apiInstance
+    .post('/api/users/update-profile', data)
+    .then((response) => response.data)
+    .catch((err) => err);
+};

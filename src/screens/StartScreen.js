@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useContext } from 'react';
-import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator } from 'react-native';
+import { View, Text, StyleSheet, TouchableOpacity, ActivityIndicator, Image } from 'react-native';
 import { Colors } from '../constants/Colors';
 import { AuthContext } from '../context/AuthContext';
 import LinearGradient from 'react-native-linear-gradient';
@@ -34,19 +34,15 @@ const StartScreen = () => {
   const signIn = async () => {
     try {
       setAuthenticating(true);
-      // console.log(await GoogleSignin.hasPlayServices())
       const googleResponse = await GoogleSignin.hasPlayServices();
       if (googleResponse) {
-        // console.log(await GoogleSignin.signIn())
         const userInfo = await GoogleSignin.signIn();
         const userTokens = await GoogleSignin.getTokens();
         const data = {
           info: userInfo.user,
           token: userTokens.accessToken
         };
-        //   console.log(data,'---data--')
         const token = await googleApi(data);
-        //   console.log(token)
         if (token.message) {
           await GoogleSignin.revokeAccess();
           await GoogleSignin.signOut();
@@ -76,7 +72,6 @@ const StartScreen = () => {
         setAuthenticating(false);
       } else {
         toast('Google Authentication Failed');
-        console.log(error);
         setAuthenticating(false);
       }
     }
@@ -85,17 +80,16 @@ const StartScreen = () => {
     <View style={{ flex: 1 }}>
       <LinearGradient style={styles.container} colors={[Colors.cornFlowerBlue, Colors.secondary]}>
         <View style={styles.title}>
-          {/* <Text style={styles.text}>Welcome</Text>
-        <Text>To</Text> */}
           <Text style={styles.titleText}>TripPlanner</Text>
         </View>
-        {/* <View>
-        <Image
-          source={require('../assets/images/logo.png')}
-          style={{ width: 300, height: 160, resizeMode: 'cover' }}
-        />
-      </View> */}
-        <Text style={styles.caption}>Capture Connect Collab</Text>
+        <View>
+          <Image
+            source={require('../assets/images/logo.png')}
+            style={{ width: 300, height: 200, resizeMode: 'contain' }}
+            imageStyle={{ borderRadius: 16 }}
+          />
+        </View>
+        <Text style={styles.caption}>Life&apos;s an Adventure—Plan It!</Text>
         <View style={styles.infoHolder}></View>
         <View style={styles.buttonHolder}>
           {authenticating ? (
@@ -109,7 +103,7 @@ const StartScreen = () => {
             </TouchableOpacity>
           )}
         </View>
-        <Text style={styles.info}>logIn or signUp, Using Google</Text>
+        <Text style={styles.info}>LogIn or SignUp, Using Google</Text>
       </LinearGradient>
       <Toast />
     </View>
@@ -139,8 +133,8 @@ const styles = StyleSheet.create({
     color: Colors.black
   },
   caption: {
-    paddingTop: 20,
-    fontSize: 16,
+    paddingTop: 0,
+    fontSize: 20,
     fontWeight: '500',
     color: Colors.black
   },
